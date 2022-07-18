@@ -22,6 +22,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 comment
+    release = "$(lsb_release -i | cut -f 2-) $(lsb_release -r | cut -f 2-)"
+    echo $release
 debianDependencies(){
     sudo apt-get update && sudo apt-get full-upgrade
     sudo apt-get install wget git curl dmg2img coreutils gcc g++
@@ -89,9 +91,10 @@ fedoraDependencies(){
     sudo mkdir /usr/share/AppData/WaveUSB/Bootloaders
     sudo unzip Bootloaders.zip /usr/share/AppData/WaveUSB/Bootloaders
 }
-solusDependencies(){
+#solusDependencies(){
 
-}
+# shellcheck disable=SC1089
+#}
 macOSDependencies(){
   wget https://raw.githubusercontent.com/RishonDev/WaveUSB-CLI/main/src/Bootloaders.zip
   sudo mkdir /Library/Application\ Support/WaveUSB/Bootloaders
