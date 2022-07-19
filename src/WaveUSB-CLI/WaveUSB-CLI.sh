@@ -22,7 +22,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 comment
-#Download Links for Installation
+
+#Download Links for ISO Images/Installers
+
     MACOS11="https://swcdn.apple.com/content/downloads/44/35/012-22320-A_AOID136T4U/g33x1akyjzjpkpe7z0xn7nguoakljpe3a8/InstallAssistant.pkg"
     MACOS12="https://swcdn.apple.com/content/downloads/16/08/012-06873-A_636SHHRD4L/528ojpmw00mulgfjsz9k50modkj31a9v0p/InstallAssistant.pkg"
     MACOS12MBP="https://swcdn.apple.com/content/downloads/16/08/012-06873-A_636SHHRD4L/528ojpmw00mulgfjsz9k50modkj31a9v0p/InstallAssistant.pkg"
@@ -41,17 +43,56 @@ comment
     MANJAROGNOME="https://download.manjaro.org/gnome/21.3.4/manjaro-gnome-21.3.4-220718-linux515.iso"
     MANJAROXFCE="https://download.manjaro.org/xfce/21.3.4/manjaro-xfce-21.3.4-220718-linux515.iso"
     MANJAROKDE="https://download.manjaro.org/kde/21.3.4/manjaro-kde-21.3.4-220718-linux515.iso"
+    LINUXMINTEDGE="https://mirrors.kernel.org/linuxmint/stable/20.3/linuxmint-20.3-cinnamon-64bit-edge.iso"
+    LINUXMINTXFCE="https://mirrors.kernel.org/linuxmint/stable/20.3/linuxmint-20.3-xfce-64bit.iso"
+    LINUXMINTCINN="https://mirrors.kernel.org/linuxmint/stable/20.3/linuxmint-20.3-cinnamon-64bit.iso"
+    LINUXMINTMATE="https://mirrors.kernel.org/linuxmint/stable/20.3/linuxmint-20.3-mate-64bit.iso"
+    ELEMENTARYOS="https://sgp1.dl.elementary.io/download/MTY1ODIyMTYzMg==/elementaryos-6.1-stable.20211218-rc.iso"
+    SOLUSGNOME="https://mirrors.rit.edu/solus/images/4.3/Solus-4.3-GNOME.iso"
+    SOLUSBUD="https://mirrors.rit.edu/solus/images/4.3/Solus-4.3-Budgie.iso"
+    SOLUSMATE="https://mirrors.rit.edu/solus/images/4.3/Solus-4.3-MATE.iso"
+    SOLUSKDE="https://mirrors.rit.edu/solus/images/4.3/Solus-4.3-Plasma.iso"
+    BLACKARCH="https://ftp.halifax.rwth-aachen.de/blackarch/iso/blackarch-linux-full-2021.09.01-x86_64.iso"
+    BLACKARCHMINIMUM="https://ftp.halifax.rwth-aachen.de/blackarch/iso/blackarch-linux-slim-2021.09.01-x86_64.iso"
+    BLACKARCHNET="https://ftp.halifax.rwth-aachen.de/blackarch/iso/blackarch-linux-netinst-2021.09.01-x86_64.iso"
+  #Input file and Output device
+    IMAGE=""
+    DRIVE=""
 echo "Welcome to waveUSB writer!"
 echo "Let's now begin to create your bootable USB device."
 echo "Do You wish to:"
 echo "1)Use a image from the local filesystem"
 echo "2) Use an image from the internet"
+echo "3)Display the program information"
+echo "4)Exit program"
 while true; do
     read yn
     case $yn in
-        [1]* ) func1; break;;
-        [2]* ) exit;;
-        * ) echo "Please answer a 1 or a 2.";;
+        [1]* ) imageFromOnline;;
+        [2]* ) localMachine;;
+        [3]* ) clear;echo "WaveUSB CLI Version 1.0";echo "Build 22.7.19";echo "Edition - CLI";echo "Build Mode:Staging";echo "More information on https://github.com/RishonDev/WaveUSB-CLI";exit;;
+        [4]* ) exit;;
     esac
 done
+localMachine(){
+  read IMAGE -p "Enter the path of the image file"
+  lsblk
+  read DRIVE -p "Enter the path of the drive"
+  clear
+  echo "Writing the image to disk..."
+  sudo dd if="$IMAGE" of="$DRIVE" bs=1M status=progress
+
+}
+welcome(){
+
+}
+imageFromOnline(){
+  echo "Enter the OS you would like to use:"
+  echo "macOS 11(Version 11.6.7, Name:macOS Big Sur)"
+  echo ""
+}
+macOS11(){
+  echo "Mac OS X"
+}
+macOS12(){}
 
