@@ -22,7 +22,19 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 comment
+
+
     RELEASE=$(lsb_release -i | cut -f 2-)$(lsb_release -r | cut -f 2-)
+    if["$RELEASE" == "Debian 11"]
+    then
+      debianDependencies
+    elif ["$RELEASE" == "Debian 10"]
+      then
+        debianDependencies
+    elif []; then
+    fi
+
+
 
 debianDependencies(){
     sudo apt-get update && sudo apt-get full-upgrade
@@ -91,11 +103,12 @@ fedoraDependencies(){
     sudo mkdir /usr/share/AppData/WaveUSB/Bootloaders
     sudo unzip Bootloaders.zip /usr/share/AppData/WaveUSB/Bootloaders
 }
-#solusDependencies(){
+solusDependencies(){
+  sudo eopkg install gcc g++
 
-# shellcheck disable=SC1089
-#}
+}
 macOSDependencies(){
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   wget https://raw.githubusercontent.com/RishonDev/WaveUSB-CLI/main/src/Bootloaders.zip
   sudo mkdir /Library/Application\ Support/WaveUSB/Bootloaders
   sudo unzip Bootloaders.zip /Library/Application\ Support/WaveUSB/Bootloaders
