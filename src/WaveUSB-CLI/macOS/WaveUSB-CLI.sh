@@ -23,10 +23,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 comment
 
-#Download Links for ISO Images/Installers
+#Download Links for ISO Images/Installers. As of now macOS Installers are not supported.
 
-    MACOS11="https://swcdn.apple.com/content/downloads/44/35/012-22320-A_AOID136T4U/g33x1akyjzjpkpe7z0xn7nguoakljpe3a8/InstallAssistant.pkg"
-    MACOS12="https://swcdn.apple.com/content/downloads/16/08/012-06873-A_636SHHRD4L/528ojpmw00mulgfjsz9k50modkj31a9v0p/InstallAssistant.pkg"
+    #MACOS11="https://swcdn.apple.com/content/downloads/44/35/012-22320-A_AOID136T4U/g33x1akyjzjpkpe7z0xn7nguoakljpe3a8/InstallAssistant.pkg"
+    #MACOS12="https://swcdn.apple.com/content/downloads/16/08/012-06873-A_636SHHRD4L/528ojpmw00mulgfjsz9k50modkj31a9v0p/InstallAssistant.pkg"
     MACOS12MBP="https://swcdn.apple.com/content/downloads/16/08/012-06873-A_636SHHRD4L/528ojpmw00mulgfjsz9k50modkj31a9v0p/InstallAssistant.pkg"
     UBUNTU="https://releases.ubuntu.com/22.04/ubuntu-22.04-desktop-amd64.iso?_ga=2.53172328.1937538139.1658218589-1552335834.1657779817"
     DEB64="https://cdimage.debian.org/debian-cd/current/amd64/bt-dvd/debian-11.4.0-amd64-DVD-1.iso.torrent"
@@ -88,11 +88,14 @@ welcome(){
 }
 imageFromOnline(){
   echo "Enter the OS you would like to use:"
-  echo "macOS 11(Version 11.6.7, Name:macOS Big Sur)"
-  echo ""
+  echo "1)macOS 11(Version 11.6.7, Name:macOS Big Sur)"
+  echo "2)macOS 12(Version 12.4, Name:macOS Monterey)"
+  
 }
 macOS11(){
-  echo "Mac OS X"
+  wget $MACOS11
+  sudo installer -pkg InstallAssistant.pkg
+
 }
 macOS12(){}
 
