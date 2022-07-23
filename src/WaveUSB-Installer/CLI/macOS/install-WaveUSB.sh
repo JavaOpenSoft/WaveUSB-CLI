@@ -21,11 +21,26 @@
 #OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #SOFTWARE.
 
-
-macOSDependencies(){
+SUPPORTED_VERSIONS=("19.5.0"
+"19.6.0"
+"19.7.0"
+"20.0.0"
+"20.1.0"
+"20.2.0"
+"20.3.0"
+"20.4.0"
+"20.5.0"
+"20.6.0"
+"21.0.0"
+"21.0.1"
+"21.1.0"
+"21.2.0"
+"21.3.0"
+"21.4.0"
+"21.5.0"
+"22.0")
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   wget https://raw.githubusercontent.com/RishonDev/WaveUSB-CLI/main/src/Bootloaders.zip
   sudo mkdir /Library/Application\ Support/WaveUSB/Bootloaders
   sudo unzip Bootloaders.zip /Library/Application\ Support/WaveUSB/Bootloaders
-
-}
+  brew install gcc g++ oracle-jdk
