@@ -44,22 +44,21 @@ debianDependencies(){
     sleep 3
         sudo zypper install gcc-c++
         wget https://raw.githubusercontent.com/RishonDev/WaveUSB-CLI/main/src/Bootloaders.zip
-        sudo mkdir /usr/share/AppData
-        sudo mkdir /usr/share/AppData/WaveUSB
-        sudo mkdir /usr/share/AppData/WaveUSB/Bootloaders
-        sudo unzip Bootloaders.zip /usr/share/AppData/WaveUSB/Bootloaders
+        sudo mkdir ~/.WaveUSB
+        sudo mkdir ~/.WaveUSB/Bootloaders
+        sudo unzip Bootloaders.zip ~/.WaveUSB/Bootloaders
+        rm -f Bootloaders.zip
 }
 ubuntuDependencies(){
     sudo add-apt-repository universe
     sudo apt-get update && sudo apt-get full-upgrade
     sudo apt install wget git curl dmg2img coreutils gcc g++
     echo "Caching Bootloaders... Please Wait..."
-        sudo zypper install gcc-c++
         wget https://raw.githubusercontent.com/RishonDev/WaveUSB-CLI/main/src/Bootloaders.zip
-        sudo mkdir /usr/share/AppData
-        sudo mkdir /usr/share/AppData/WaveUSB
-        sudo mkdir /usr/share/AppData/WaveUSB/Bootloaders
-        sudo unzip Bootloaders.zip /usr/share/AppData/WaveUSB/Bootloaders
+        sudo mkdir ~/.WaveUSB
+        sudo mkdir ~/.WaveUSB/Bootloaders
+        sudo unzip Bootloaders.zip ~/.WaveUSB/Bootloaders
+        rm -f Bootloaders.zip
 }
 archlinuxDependencies(){
     pacman -Syu
@@ -70,10 +69,10 @@ archlinuxDependencies(){
     echo "Caching Bootloaders... Please Wait..."
         sudo zypper install gcc-c++
         wget https://raw.githubusercontent.com/RishonDev/WaveUSB-CLI/main/src/Bootloaders.zip
-        sudo mkdir /usr/share/AppData
-        sudo mkdir /usr/share/AppData/WaveUSB
-        sudo mkdir /usr/share/AppData/WaveUSB/Bootloaders
-        sudo unzip Bootloaders.zip /usr/share/AppData/WaveUSB/Bootloaders
+        sudo mkdir ~/.WaveUSB
+        sudo mkdir ~/.WaveUSB/Bootloaders
+        sudo unzip Bootloaders.zip ~/.WaveUSB/Bootloaders
+        rm -f Bootloaders.zip
 }
 opensuseDependencies(){
     echo "Choose your Opensuse Release:"
@@ -90,27 +89,20 @@ done
     echo "Caching Bootloaders... Please Wait..."
     sudo zypper install gcc-c++
     wget https://raw.githubusercontent.com/RishonDev/WaveUSB-CLI/main/src/Bootloaders.zip
-    sudo mkdir /usr/share/AppData
-    sudo mkdir /usr/share/AppData/WaveUSB
-    sudo mkdir /usr/share/AppData/WaveUSB/Bootloaders
-    sudo unzip Bootloaders.zip /usr/share/AppData/WaveUSB/Bootloaders
+    sudo mkdir ~/.WaveUSB
+        sudo mkdir ~/.WaveUSB/Bootloaders
+        sudo unzip Bootloaders.zip ~/.WaveUSB/Bootloaders
+        rm -f Bootloaders.zip
 }
 fedoraDependencies(){
     echo "Caching Bootloaders... Please Wait..."
     wget https://raw.githubusercontent.com/RishonDev/WaveUSB-CLI/main/src/Bootloaders.zip
-    sudo mkdir /usr/share/AppData
-    sudo mkdir /usr/share/AppData/WaveUSB
-    sudo mkdir /usr/share/AppData/WaveUSB/Bootloaders
-    sudo unzip Bootloaders.zip /usr/share/AppData/WaveUSB/Bootloaders
+    sudo mkdir ~/.WaveUSB
+        sudo mkdir ~/.WaveUSB/Bootloaders
+        sudo unzip Bootloaders.zip ~/.WaveUSB/Bootloaders
+        rm -f Bootloaders.zip
 }
 solusDependencies(){
   sudo eopkg install gcc g++
-
-}
-macOSDependencies(){
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  wget https://raw.githubusercontent.com/RishonDev/WaveUSB-CLI/main/src/Bootloaders.zip
-  sudo mkdir /Library/Application\ Support/WaveUSB/Bootloaders
-  sudo unzip Bootloaders.zip /Library/Application\ Support/WaveUSB/Bootloaders
 
 }
