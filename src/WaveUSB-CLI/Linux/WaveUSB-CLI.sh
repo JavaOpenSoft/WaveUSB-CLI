@@ -25,8 +25,8 @@ comment
 
 #Download Links for ISO Images/Installers. As of now macOS Installers are not supported.
 
-    #MACOS11="https://swcdn.apple.com/content/downloads/44/35/012-22320-A_AOID136T4U/g33x1akyjzjpkpe7z0xn7nguoakljpe3a8/InstallAssistant.pkg"
-    #MACOS12="https://swcdn.apple.com/content/downloads/16/08/012-06873-A_636SHHRD4L/528ojpmw00mulgfjsz9k50modkj31a9v0p/InstallAssistant.pkg"
+    MACOS11="https://swcdn.apple.com/content/downloads/44/35/012-22320-A_AOID136T4U/g33x1akyjzjpkpe7z0xn7nguoakljpe3a8/InstallAssistant.pkg"
+    MACOS12="https://swcdn.apple.com/content/downloads/22/05/012-42714-A_04QVESBZ2P/lnob1ikkx0mi6yz5x339ttchkxri53151v/InstallAssistant.pkg"
     MACOS12MBP="https://swcdn.apple.com/content/downloads/16/08/012-06873-A_636SHHRD4L/528ojpmw00mulgfjsz9k50modkj31a9v0p/InstallAssistant.pkg"
     UBUNTU="https://releases.ubuntu.com/22.04/ubuntu-22.04-desktop-amd64.iso?_ga=2.53172328.1937538139.1658218589-1552335834.1657779817"
     DEB64="https://cdimage.debian.org/debian-cd/current/amd64/bt-dvd/debian-11.4.0-amd64-DVD-1.iso.torrent"
@@ -58,6 +58,44 @@ comment
   #Input file and Output device
     IMAGE=""
     DRIVE=""
+    while getopts 'iohaw:' OPTION; do
+  case "$OPTION" in
+    i)
+       export IMAGE="$OPTARG"
+       exit;;
+    o)
+     export DRIVE="$OPTARG"
+     exit;;  
+    h)
+      echo "-i Input image Like this: -i YOURIMAGEHERE"
+      echo "-o Output USB Drive Like this : -o YOURIMAGEHERE"
+      echo "-w Writes to the USB drive."
+      echo "-a Displays the Software script information"
+      echo "-h Displays this exact same help."
+      echo "Example uasge: ./WaveUSB.sh -i Your/image/path/here -o /Your/USB/Path/Here -w"
+      exit;;
+    a)
+    
+      echo "WaveUSB CLI Version 1.0"
+      echo "Build 22.7.19"
+      echo "Edition - CLI";
+      echo "Build Mode:Staging"
+      echo "More information on https://github.com/RishonDev/WaveUSB-CLI"
+      exit;;
+    
+    w)
+    sudo dd if="$IMAGE" of="$DRIVE" bs=1M status=progress
+    exit;;  
+    ?)
+      echo "script usage: $(basename \$0) [-l] [-h] [-a somevalue]" >&2
+      exit 1
+      exit;;
+  esac
+
+  
+
+done
+shift "$(($OPTIND -1))"
 echo "Welcome to waveUSB writer!"
 echo "Let's now begin to create your bootable USB device."
 echo "Do You wish to:"
@@ -69,22 +107,25 @@ while true; do
     read yn
     case $yn in
         [1]* ) imageFromOnline;;
-        [2]* ) localMachine;;
+        [2]* ) read IMAGE -p "Enter the path of the image file"
+               lsblk
+               read DRIVE -p "Enter the path of the drive"
+                clear
+                echo "Writing the image to disk..."
+                sudo dd if="$IMAGE" of="$DRIVE" bs=1M status=progress;;
         [3]* ) clear;echo "WaveUSB CLI Version 1.0";echo "Build 22.7.19";echo "Edition - CLI";echo "Build Mode:Staging";echo "More information on https://github.com/RishonDev/WaveUSB-CLI";exit;;
         [4]* ) exit;;
     esac
 done
-localMachine(){
-  read IMAGE -p "Enter the path of the image file"
-  lsblk
-  read DRIVE -p "Enter the path of the drive"
-  clear
-  echo "Writing the image to disk..."
-  sudo dd if="$IMAGE" of="$DRIVE" bs=1M status=progress
 
-}
 welcome(){
-
+  echo "Welcome to waveUSB writer!"
+  echo "Let's now begin to create your bootable USB device."
+  echo "Do You wish to:"
+  echo "1)Use a image from the local filesystem"
+  echo "2) Use an image from the internet"
+  echo "3)Display the program information"
+  echo "4)Exit program"
 }
 imageFromOnline(){
   echo "Enter the OS you would like to use:"
@@ -92,10 +133,10 @@ imageFromOnline(){
   echo "2)macOS 12(Version 12.4, Name:macOS Monterey)"
 
 }
-macOS11(){
-  wget $MACOS11
-  sudo installer -pkg InstallAssistant.pkg
+macOS12(){}
+write(){
+  sudo dd if="$IMAGE" of="$DRIVE" bs=1M status=progress
+}about(){
 
 }
-macOS12(){}
 
